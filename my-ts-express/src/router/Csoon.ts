@@ -11,7 +11,7 @@ class ComingSoonRouter {
 
     private initializeRoutes(): void {
         this.router.get("/", SoonController.showCommingSoon);
-        this.router.post("/sending", SoonController.sendingToEmail);
+        this.router.post("/sending", SoonController.subscribeEmail);
     }
 }
 

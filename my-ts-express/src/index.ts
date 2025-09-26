@@ -1,19 +1,22 @@
 import express, { Application } from "express";
-import ComingSoonRouter from "./router/Csoon"
 import path from "path"
 import dotenv from 'dotenv';
+import ComingSoonRouter from "./router/Csoon"
+import DBconnect from "./config/DB"
 dotenv.config();
 
 class Server {
     private app: Application;   
     private port: number;
+    private DB : DBconnect;
 
     constructor(port: number) {
         this.app = express();
         this.port = port;
-
+        this.DB = DBconnect.getInstance()
         this.initializeMiddlewares();
         this.initializeRoutes();
+        
     }
 
    private initializeMiddlewares(): void {
@@ -31,7 +34,8 @@ class Server {
         this.app.use("/", ComingSoonRouter);                     // home routes
     }
 
-    public listen(): void {
+    public  async listen(): Promise<void> {
+        await this.DB.connect();
         this.app.listen(this.port, () => {
             console.log(`Server running at http://localhost:${this.port}`);
         });
