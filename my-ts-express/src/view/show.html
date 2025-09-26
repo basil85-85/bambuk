@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bambuk - Premium Fashion</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #2E7D32 0%, #4CAF50 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: #4CAF50;
+        }
+
+        /* Page Sections */
+        .page-section {
+            min-height: 100vh;
+            display: none;
+            padding-top: 80px;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        /* Coming Soon Page */
+        .coming-soon {
+            background: linear-gradient(135deg, #2E7D32 0%, #4CAF50 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .coming-soon::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .coming-soon-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            padding: 2rem;
+        }
+
+        .coming-soon h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .coming-soon p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.3s forwards;
+        }
+
+        .launch-date {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.6s forwards;
+        }
+
+        .notify-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.9s forwards;
+        }
+
+        .notify-btn:hover {
+            background: white;
+            color: #2E7D32;
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Products Page */
+        .products {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 4rem 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(135deg, #2E7D32 0%, #4CAF50 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.3rem;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:nth-child(1) .product-image {
+            background: linear-gradient(45deg, #2E7D32 0%, #4CAF50 100%);
+        }
+
+        .product-card:nth-child(2) .product-image {
+            background: linear-gradient(45deg, #388E3C 0%, #66BB6A 100%);
+        }
+
+        .product-card:nth-child(3) .product-image {
+            background: linear-gradient(45deg, #1B5E20 0%, #43A047 100%);
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .product-content {
+            padding: 2rem;
+        }
+
+        .product-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #2E7D32;
+            font-weight: bold;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #4CAF50;
+            margin-bottom: 1rem;
+        }
+
+        .product-description {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .add-to-cart {
+            background: linear-gradient(135deg, #2E7D32 0%, #4CAF50 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .add-to-cart:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
+        }
+
+        /* About Page */
+        .about {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 4rem 2rem;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            background: white;
+            padding: 4rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-text h3 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, #2E7D32 0%, #4CAF50 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .about-image {
+            aspect-ratio: 1;
+            border-radius: 20px;
+            background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #4CAF50;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .coming-soon h1 {
+                font-size: 2.5rem;
+            }
+
+            .product-grid,
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Bambuk</div>
+           
+        </div>
+    </nav>
+
+  
+    <div id="products" class="page-section products">
+        <div class="container">
+            <h2 class="section-title">Our Collection</h2>
+            <div class="products-grid">
+                <!-- Product 1: Bamboo Fiber Dress -->
+                <div class="product-card">
+                    <div class="product-image">Bamboo Elegance Collection</div>
+                    <div class="product-content">
+                        <h3>Eco Elegance</h3>
+                        <div class="product-price">₹4,999</div>
+                        <p class="product-description">
+                            Luxurious evening dress crafted from premium bamboo fiber. Soft, breathable, and naturally antibacterial. Features a flowing silhouette that drapes beautifully while being completely sustainable.
+                        </p>
+                        <button class="add-to-cart" onclick="addToCart('Eco Elegance')">Pre-Order Now</button>
+                    </div>
+                </div>
+
+                <!-- Product 2: Bamboo Cotton Blend -->
+                <div class="product-card">
+                    <div class="product-image">Bamboo Daily Wear</div>
+                    <div class="product-content">
+                        <h3>Natural Comfort</h3>
+                        <div class="product-price">₹2,999</div>
+                        <p class="product-description">
+                            Perfect casual dress made from bamboo-cotton blend. Ultra-soft texture with moisture-wicking properties. Ideal for everyday wear with a relaxed fit and modern design.
+                        </p>
+                        <button class="add-to-cart" onclick="addToCart('Natural Comfort')">Pre-Order Now</button>
+                    </div>
+                </div>
+
+                <!-- Product 3: Premium Bamboo Silk -->
+                <div class="product-card">
+                    <div class="product-image">Bamboo Premium Line</div>
+                    <div class="product-content">
+                        <h3>Silk Bamboo Fusion</h3>
+                        <div class="product-price">₹6,999</div>
+                        <p class="product-description">
+                            Premium cocktail dress combining bamboo fiber with silk for ultimate luxury. Temperature-regulating, hypoallergenic, and incredibly soft. Perfect for special occasions.
+                        </p>
+                        <button class="add-to-cart" onclick="addToCart('Silk Bamboo Fusion')">Pre-Order Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  
+
+  
+</body>
+</html>
