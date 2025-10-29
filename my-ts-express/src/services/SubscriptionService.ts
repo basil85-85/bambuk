@@ -49,7 +49,7 @@ class SubscriptionService {
           <h2 style="color: #e63946; margin-top: 0;">Welcome to the Bambuk Family!</h2>
           <p>Hi there,</p>
           <p>Thank you for subscribing with <strong>${email}</strong>!</p>
-          <p>We're excited to have you on board. You'll be the first to know when our exclusive <strong>Bambuk Dress Collection</strong> launches on <strong>November 1st</strong>.</p>
+          <p>We're excited to have you on board. You'll be the first to know when our exclusive <strong>Bambuk Dress Collection</strong> launches on <strong>November 21st</strong>.</p>
           
           <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
             <p style="margin-top: 0;"><strong>✨ Here's what to expect:</strong></p>

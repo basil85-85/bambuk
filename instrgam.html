@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #fafafa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .main-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 935px;
+        }
+
+        .phone-mockup {
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDU0IiBoZWlnaHQ9IjYxOCIgdmlld0JveD0iMCAwIDQ1NCA2MTgiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHg9IjEiIHk9IjEiIHdpZHRoPSI0NTIiIGhlaWdodD0iNjE2IiByeD0iMzQiIHN0cm9rZT0iI2RiZGJkYiIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxyZWN0IHg9IjI2IiB5PSI3NCIgd2lkdGg9IjQwMiIgaGVpZ2h0PSI0NzAiIGZpbGw9IiNmZmZmZmYiLz4KPC9zdmc+');
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 454px;
+            height: 618px;
+            margin-right: 32px;
+            display: none;
+        }
+
+        @media (min-width: 875px) {
+            .phone-mockup {
+                display: block;
+            }
+        }
+
+        .login-section {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .login-box {
+            background-color: #ffffff;
+            border: 1px solid #dbdbdb;
+            padding: 40px 40px 24px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .instagram-logo {
+            width: 175px;
+            height: 51px;
+            margin: 0 auto 32px;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTc1IiBoZWlnaHQ9IjUxIiB2aWV3Qm94PSIwIDAgMTc1IDUxIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cGF0aCBkPSJNMTQ0LjcgMy4yYy01LjMgMC05LjYgNC4zLTkuNiA5LjZ2MjUuNGMwIDUuMyA0LjMgOS42IDkuNiA5LjZoMjUuNGM1LjMgMCA5LjYtNC4zIDkuNi05LjZWMTIuOGMwLTUuMy00LjMtOS42LTkuNi05LjZoLTI1LjR6bTIwLjEgMTVjMCA4LjgtNy4xIDE1LjktMTUuOSAxNS45cy0xNS45LTcuMS0xNS45LTE1LjkgNy4xLTE1LjkgMTUuOS0xNS45IDE1LjkgNy4xIDE1LjkgMTUuOXptLTEyLjggMGMwIDQuOS0zLjkgOC44LTguOCA4LjhzLTguOC0zLjktOC44LTguOCAzLjktOC44IDguOC04LjggOC44IDMuOSA4LjggOC44eiIgZmlsbD0iIzI2MjYyNiIvPgo8cGF0aCBkPSJNMzAuMSAzLjJjLTUuMyAwLTkuNiA0LjMtOS42IDkuNnYyNS40YzAgNS4zIDQuMyA5LjYgOS42IDkuNmgyNS40YzUuMyAwIDkuNi00LjMgOS42LTkuNlYxMi44YzAtNS4zLTQuMy05LjYtOS42LTkuNkgzMC4xem0yMC4xIDE1YzAgOC44LTcuMSAxNS45LTE1LjkgMTUuOXMtMTUuOS03LjEtMTUuOS0xNS45IDcuMS0xNS45IDE1LjktMTUuOSAxNS45IDcuMSAxNS45IDE1Ljl6bS0xMi44IDBjMCA0LjktMy45IDguOC04LjggOC44cy04LjgtMy45LTguOC04LjggMy45LTguOCA4LjgtOC44IDguOCAzLjkgOC44IDguOHoiIGZpbGw9IiMyNjI2MjYiLz4KPHRleHQgeD0iNzAiIHk9IjMzIiBmb250LWZhbWlseT0iSW5zdGFncmFtU2FucyxzYW5zLXNlcmlmIiBmb250LXNpemU9IjMwIiBmaWxsPSIjMjYyNjI2Ij5JbnN0YWdyYW08L3RleHQ+Cjwvc3ZnPg==');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .form-group {
+            margin-bottom: 6px;
+            position: relative;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 9px 0 7px 8px;
+            border: 1px solid #dbdbdb;
+            border-radius: 3px;
+            background-color: #fafafa;
+            font-size: 12px;
+            line-height: 16px;
+            color: #262626;
+            outline: none;
+            transition: border-color 0.2s ease-in-out;
+        }
+
+        .form-input:focus {
+            border-color: #a8a8a8;
+        }
+
+        .form-input::placeholder {
+            color: #8e8e8e;
+        }
+
+        .login-button {
+            background-color: #0095f6;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 18px;
+            padding: 5px 9px;
+            text-align: center;
+            width: 100%;
+            margin: 8px 0;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .login-button:hover {
+            background-color: #1877f2;
+        }
+
+        .login-button:disabled {
+            background-color: #0095f6;
+            opacity: 0.3;
+            cursor: default;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: 10px 0 18px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background-color: #dbdbdb;
+        }
+
+        .divider span {
+            margin: 0 18px;
+            color: #8e8e8e;
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 15px;
+            text-transform: uppercase;
+        }
+
+        .facebook-login {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 14px;
+            text-decoration: none;
+            color: #385185;
+            font-size: 14px;
+            font-weight: 600;
+            line-height: 18px;
+        }
+
+        .facebook-icon {
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+            background-color: #385185;
+            border-radius: 2px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 10px;
+            font-weight: bold;
+        }
+
+        .forgot-password {
+            color: #00376b;
+            font-size: 12px;
+            line-height: 14px;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .signup-box {
+            background-color: #ffffff;
+            border: 1px solid #dbdbdb;
+            padding: 10px 0;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .signup-text {
+            color: #262626;
+            font-size: 14px;
+            line-height: 18px;
+            margin: 15px;
+        }
+
+        .signup-link {
+            color: #0095f6;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .app-download {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .get-app-text {
+            color: #262626;
+            font-size: 14px;
+            line-height: 18px;
+            margin: 10px 0 20px;
+        }
+
+        .download-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .download-button {
+            height: 40px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            border: none;
+            cursor: pointer;
+        }
+
+        .app-store {
+            width: 136px;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTM2IiBoZWlnaHQ9IjQwIiB2aWV3Qm94PSIwIDAgMTM2IDQwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iMTM2IiBoZWlnaHQ9IjQwIiByeD0iNCIgZmlsbD0iIzAwMCIvPgo8dGV4dCB4PSI2OCIgeT0iMjQiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMiIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+RG93bmxvYWQgb24gdGhlIEFwcCBTdG9yZTwvdGV4dD4KPC9zdmc+');
+        }
+
+        .google-play {
+            width: 136px;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTM2IiBoZWlnaHQ9IjQwIiB2aWV3Qm94PSIwIDAgMTM2IDQwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgo8cmVjdCB3aWR0aD0iMTM2IiBoZWlnaHQ9IjQwIiByeD0iNCIgZmlsbD0iIzAwMCIvPgo8dGV4dCB4PSI2OCIgeT0iMjQiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxMiIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+R2V0IGl0IG9uIEdvb2dsZSBQbGF5PC90ZXh0Pgo8L3N2Zz4=');
+        }
+
+        .footer {
+            margin-top: 56px;
+            padding: 0 16px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+
+        .footer-link {
+            color: #8e8e8e;
+            font-size: 12px;
+            line-height: 14px;
+            text-decoration: none;
+            margin: 0 8px 12px;
+        }
+
+        .copyright {
+            color: #8e8e8e;
+            font-size: 12px;
+            line-height: 14px;
+            text-align: center;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 450px) {
+            body {
+                background-color: #ffffff;
+            }
+
+            .main-container {
+                width: 100%;
+            }
+
+            .login-section {
+                max-width: 100%;
+            }
+
+            .login-box {
+                border: none;
+                padding: 20px 0;
+            }
+
+            .signup-box {
+                border: none;
+                background-color: transparent;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="phone-mockup"></div>
+        
+        <div class="login-section">
+            <div class="login-box">
+                <div class="instagram-logo"></div>
+                
+                <form id="loginForm">
+                    <div class="form-group">
+                        <input type="text" class="form-input" placeholder="Phone number, username, or email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="password" class="form-input" placeholder="Password" required>
+                    </div>
+
+                    <button type="submit" class="login-button" id="loginBtn">Log in</button>
+                </form>
+
+                <div class="divider">
+                    <span>or</span>
+                </div>
+
+                <a href="#" class="facebook-login" onclick="alert('Facebook login integration would be implemented here')">
+                    <div class="facebook-icon">f</div>
+                    Log in with Facebook
+                </a>
+
+                <a href="#" class="forgot-password" onclick="alert('Password reset would be implemented here')">
+                    Forgot password?
+                </a>
+            </div>
+
+            <div class="signup-box">
+                <p class="signup-text">
+                    Don't have an account? 
+                    <a href="#" class="signup-link" onclick="alert('Sign up page would be implemented here')">Sign up</a>
+                </p>
+            </div>
+
+            <div class="app-download">
+                <p class="get-app-text">Get the app.</p>
+                <div class="download-buttons">
+                    <button class="download-button app-store" onclick="alert('App Store link would be implemented here')"></button>
+                    <button class="download-button google-play" onclick="alert('Google Play link would be implemented here')"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-links">
+            <a href="#" class="footer-link">Meta</a>
+            <a href="#" class="footer-link">About</a>
+            <a href="#" class="footer-link">Blog</a>
+            <a href="#" class="footer-link">Jobs</a>
+            <a href="#" class="footer-link">Help</a>
+            <a href="#" class="footer-link">API</a>
+            <a href="#" class="footer-link">Privacy</a>
+            <a href="#" class="footer-link">Terms</a>
+            <a href="#" class="footer-link">Locations</a>
+            <a href="#" class="footer-link">Instagram Lite</a>
+            <a href="#" class="footer-link">Contact Uploading & Non-Users</a>
+            <a href="#" class="footer-link">Meta Verified</a>
+        </div>
+        <p class="copyright">© 2024 Instagram from Meta</p>
+    </div>
+
+    <script>
+        // Form validation and submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const inputs = document.querySelectorAll('.form-input');
+            const loginBtn = document.getElementById('loginBtn');
+            
+            // Check if both fields have values
+            let allFieldsFilled = true;
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    allFieldsFilled = false;
+                }
+            });
+            
+            if (allFieldsFilled) {
+                loginBtn.style.opacity = '0.7';
+                loginBtn.textContent = 'Logging in...';
+                loginBtn.disabled = true;
+                
+                setTimeout(() => {
+                    alert('Login functionality would be implemented here with backend integration');
+                    loginBtn.style.opacity = '1';
+                    loginBtn.textContent = 'Log in';
+                    loginBtn.disabled = false;
+                }, 1500);
+            }
+        });
+
+        // Enable/disable login button based on input
+        const inputs = document.querySelectorAll('.form-input');
+        const loginBtn = document.getElementById('loginBtn');
+
+        function checkInputs() {
+            let allFieldsFilled = true;
+            inputs.forEach(input => {
+                if (!input.value.trim()) {
+                    allFieldsFilled = false;
+                }
+            });
+            
+            if (allFieldsFilled) {
+                loginBtn.disabled = false;
+                loginBtn.style.opacity = '1';
+            } else {
+                loginBtn.disabled = true;
+                loginBtn.style.opacity = '0.3';
+            }
+        }
+
+        inputs.forEach(input => {
+            input.addEventListener('input', checkInputs);
+        });
+
+        // Initialize button state
+        checkInputs();
+    </script>
+</body>
+</html>
